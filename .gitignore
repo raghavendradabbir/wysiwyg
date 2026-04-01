@@ -15,7 +15,6 @@ bin-release/
 
 .DS_Store
 
-dist/
 node_modules/
 tests/test-results/
 tests/playwright-report/
