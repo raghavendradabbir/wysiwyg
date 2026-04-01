@@ -1,0 +1,884 @@
+@mixin action-btn {
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-base);
+
+  &:hover {
+    background: var(--color-surface-hover);
+  }
+}
+
+/* Left Sidebar Component Styles */
+left-sidebar {
+  display: block;
+
+  .left-sidebar {
+    /* container width adjusts based on content visibility */
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    background: var(--color-surface-hover);
+    border-right: 1px solid var(--color-border);
+    height: 100%;
+    /* smooth width transition for container */
+    transition: width 300ms cubic-bezier(0.4, 0.0, 0.2, 1);
+    overflow: hidden;
+
+
+    #leftSidebarContent {
+      /* expanded dimensions */
+      flex: 0 0 270px;
+      width: 270px;
+      min-width: 270px;
+
+      /* scrolling behavior when expanded */
+      overflow-y: auto;
+      overflow-x: hidden;
+      transform: translateX(0);
+
+      /* smooth animation - width expands first during expansion */
+      will-change: transform;
+      transition: transform var(--transition-slow), flex-basis var(--transition-slow), width var(--transition-slow), min-width var(--transition-slow);
+
+      /* ensure content stays in bounds */
+      position: relative;
+    }
+
+    /* Fade animation for inner content without affecting slide */
+    #leftSidebarContent>* {
+      opacity: 1;
+      transition: opacity var(--transition-base);
+      will-change: opacity;
+    }
+
+    /* Collapsed state - slide and collapse */
+    #leftSidebarContent.collapsed {
+      /* slide the entire layer to the left */
+      pointer-events: none;
+      transform: translateX(-100%);
+
+      /* collapse the container space after sliding */
+      flex: 0 0 0px;
+      width: 0px;
+      min-width: 0px;
+
+      /* hide overflow to prevent scrollbars */
+      overflow: hidden;
+
+      /* disable interactions while collapsed */
+      pointer-events: none;
+      transition: transform 300ms, flex-basis 300ms, width 300ms, min-width 300ms;
+    }
+
+    /* When collapsed, fade out inner content */
+    #leftSidebarContent.collapsed>* {
+      opacity: 0;
+    }
+
+  }
+
+
+  #leftSidebarContent {
+    flex: 1;
+    background: var(--color-surface-hover);
+    overflow-y: auto;
+    // overflow-x: hidden;
+  }
+
+  // Sidebar Sections (replacing panels)
+
+  .activity-bar {
+    width: 50px;
+    background: var(--color-gray-900);
+    border-right: 1px solid var(--color-gray-800);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 100;
+  }
+
+  .activity-bar-items {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .activity-bar-bottom {
+    display: flex;
+    flex-direction: column;
+    margin-top: auto;
+  }
+
+  .activity-item {
+    width: 50px;
+    height: 50px;
+    border: none;
+    background: transparent;
+    color: var(--color-gray-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition-base);
+    position: relative;
+
+    &:hover {
+      background: var(--color-gray-800);
+      color: var(--color-gray-300);
+    }
+
+    &.active {
+      color: var(--color-white);
+      background: var(--color-gray-800);
+      border-left: 3px solid var(--color-accent);
+
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: var(--space-3);
+        bottom: var(--space-3);
+        width: 2px;
+      }
+    }
+
+    i {
+      font-size: var(--font-size-lg);
+    }
+  }
+
+  
+
+  .sidebar {
+    // width: 320px;
+    background: var(--color-surface);
+    overflow-y: auto;
+    box-sizing: border-box;
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar.collapsed {
+    transform: translateX(-100%);
+  }
+
+  .sidebar-activity-buttons {
+    display: flex;
+    flex-direction: row;
+    height: auto;
+    min-height: 100%;
+  }
+
+  .sidebar-section {
+    display: none;
+    border-bottom: 1px solid var(--color-border);
+
+    &:last-child {
+      border-bottom: none;
+    }
+    
+    &.active {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    h3 {
+      margin: 0;
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      background: var(--color-surface-elevated);
+      border-bottom: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      i {
+        font-size: 0.9rem;
+        color: var(--color-accent);
+      }
+    }
+
+    // Special handling for blocks and assets panels
+    &[data-section="blocks"],
+    &[data-section="assets"] {
+      padding: 0;
+      
+      blocks-panel,
+      assets-panel {
+        height: 100%;
+        border: none;
+      }
+    }
+
+    &:hover {
+      background: var(--color-surface-hover);
+      border-color: var(--color-accent);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    &:active,
+    &.dragging {
+      cursor: grabbing;
+      opacity: 0.8;
+      transform: scale(0.98);
+    }
+
+    &:focus {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+  }
+
+  .drag-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .drag-item {
+    padding: var(--space-5) var(--space-3);
+    background: var(--color-surface);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    cursor: grab;
+    transition: var(--transition-base);
+    text-align: center;
+    font-weight: 500;
+    font-size: 0.8rem;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    user-select: none;
+  }
+  
+  .drag-item:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-border-strong);
+  }
+  
+  .drag-item:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+  }
+  
+  .drag-item.dragging {
+    opacity: 0.5;
+  }
+
+  // Layer Manager
+  .layer-manager {
+    padding: 0.5rem;
+
+    .layer-manager-header {
+      margin-bottom: 0.5rem;
+
+      .layer-controls {
+        display: none; // Initially hidden, shown via JavaScript when layer is selected
+        gap: 0.25rem;
+        justify-content: center;
+        padding: 0.25rem;
+        background: var(--color-surface-elevated);
+        border-radius: 4px;
+      }
+
+      .layer-control-btn {
+        background: none;
+        border: none;
+        color: var(--color-text-muted);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 3px;
+        font-size: 0.8rem;
+        transition: all 0.2s ease;
+        min-width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+          background: var(--color-surface-hover);
+          color: var(--color-text);
+        }
+
+        &:focus {
+          outline: 1px solid var(--color-accent);
+          outline-offset: 1px;
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  .layers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .layer-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    margin-bottom: 0.25rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--color-surface-hover);
+      border-color: var(--color-accent);
+    }
+
+    &.selected {
+      background: var(--color-accent-light);
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .layer-visibility {
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 3px;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background: var(--color-surface-hover);
+      }
+
+      i {
+        color: var(--color-text-muted);
+        font-size: 0.9rem;
+      }
+    }
+
+    .layer-info {
+      flex: 1;
+      min-width: 0;
+
+      .layer-name {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--color-text);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .layer-type {
+        font-size: 0.75rem;
+        color: var(--color-text-muted);
+        text-transform: capitalize;
+      }
+    }
+
+    .layer-actions {
+      display: flex;
+      gap: 2px;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    &:hover .layer-actions {
+      opacity: 1;
+    }
+
+    .layer-action-btn {
+      background: none;
+      border: none;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 3px;
+      font-size: 0.75rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: var(--color-surface-hover);
+        color: var(--color-text);
+      }
+    }
+  }
+
+
+  
+
+  // Consolidated layer action button styles
+  .layer-action-btn {
+    @include action-btn;
+    width: 16px;
+    height: 16px;
+    font-size: 10px;
+    border-radius: 2px;
+
+    &.visibility {
+      color: var(--color-success);
+    }
+
+    &.lock {
+      color: var(--color-warning);
+    }
+
+    &.delete {
+      color: var(--color-error);
+    }
+  }
+
+  .layer-btn {
+    width: 20px;
+    height: 20px;
+    border: none;
+    background: var(--color-accent);
+    color: var(--color-white);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .layer-btn:hover {
+    background: var(--color-accent-strong);
+  }
+
+  .no-layers,
+  .no-hierarchy {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
+    font-style: italic;
+  }
+
+  // Hierarchy Tree
+  .hierarchy-manager {
+    padding: 0.5rem;
+
+    .empty-state {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--color-text-muted);
+
+      i {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        opacity: 0.5;
+        color: var(--color-accent);
+      }
+
+      p {
+        margin: 0 0 1rem 0;
+        font-size: 0.9rem;
+      }
+
+      .btn {
+        background: var(--color-accent);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.85rem;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: var(--color-accent-strong);
+        }
+
+        i {
+          font-size: 0.85rem;
+          margin-right: 0.5rem;
+          color: white;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .hierarchy-node {
+    margin-bottom: 0.25rem;
+  }
+
+  .hierarchy-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--color-surface-hover);
+      border-color: var(--color-accent);
+    }
+
+    &.active {
+      background: var(--color-accent-light);
+      border-color: var(--color-accent);
+      color: var(--color-accent);
+    }
+
+    .hierarchy-toggle {
+      background: none;
+      border: none;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 3px;
+      transition: all 0.2s ease;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover {
+        background: var(--color-surface-hover);
+      }
+
+      &.expanded i {
+        transform: rotate(90deg);
+      }
+
+      i {
+        font-size: 0.75rem;
+        transition: transform 0.2s ease;
+      }
+    }
+
+    .hierarchy-spacer {
+      width: 20px;
+      height: 20px;
+    }
+
+    .hierarchy-icon {
+      color: var(--color-accent);
+      font-size: 0.9rem;
+      width: 16px;
+      text-align: center;
+    }
+
+    .hierarchy-label {
+      flex: 1;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--color-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .hierarchy-actions {
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    &:hover .hierarchy-actions {
+      opacity: 1;
+    }
+
+    .hierarchy-action-btn {
+      background: none;
+      border: none;
+      color: var(--color-text-muted);
+      cursor: pointer;
+      padding: 0.25rem;
+      border-radius: 3px;
+      font-size: 0.75rem;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: var(--color-surface-hover);
+        color: var(--color-text);
+      }
+    }
+  }
+
+  /* Integrated Hierarchy Tree */
+  .hierarchy-manager {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .hierarchy-tree {
+    font-size: 0.875rem;
+  }
+
+  .tree-solution {
+    border: 1px solid var(--color-border);
+  }
+
+  .tree-item {
+    margin-bottom: 2px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--color-surface-hover);
+    }
+
+    &.tree-page {
+      &.active {
+        // background: var(--color-accent-light);
+        // border-left: 3px solid var(--color-accent);
+        color: var(--color-accent);
+
+        .tree-icon,
+        .tree-name {
+          color: var(--color-accent);
+        }
+      }
+    }
+
+    &.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+  }
+
+  .tree-item-content {
+    display: flex;
+    align-items: center;
+    padding: 6px 8px;
+    gap: 6px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .tree-expander {
+    width: 12px;
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    transition: transform 0.2s ease;
+
+    &:hover {
+      color: var(--color-text);
+    }
+  }
+
+  .tree-icon {
+    color: var(--color-text-muted);
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+
+  .tree-solution {
+    padding-left: 8px;
+  }
+
+  .tree-project {
+    padding-left: 16px;
+  }
+
+  .tree-pages-group {
+    padding-left: 12px;
+  }
+
+  .tree-page {
+    padding-left: 36px;
+  }
+
+
+  .tree-page .tree-icon {
+    color: var(--color-text-muted);
+  }
+
+  .tree-name {
+    flex: 1;
+    font-weight: 500;
+    color: var(--color-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .tree-count {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    background: var(--color-surface-hover);
+    padding: 1px 5px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .tree-actions {
+    display: flex;
+    gap: 2px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
+
+  .tree-item:hover .tree-actions {
+    opacity: 1;
+  }
+
+  .tree-action-btn {
+    background: transparent;
+    border: none;
+    padding: 3px;
+    border-radius: 3px;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    font-size: 0.7rem;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--color-surface-hover);
+      color: var(--color-text);
+    }
+  }
+
+  .hierarchy-children {
+    margin-left: 1.5rem;
+    margin-top: 0.25rem;
+  }
+
+  // Responsive design
+  @media (max-width: 1024px) {
+    // .left-sidebar {
+    //   width: 280px;
+    // }
+
+    .activity-bar {
+      width: 40px;
+
+      .activity-item {
+        width: 40px;
+        height: 40px;
+
+        i {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    // .left-sidebar {
+    //   width: 260px;
+    // }
+
+    .activity-bar {
+      width: 36px;
+
+      .activity-item {
+        width: 36px;
+        height: 36px;
+
+        i {
+          font-size: 0.9rem;
+        }
+      }
+    }
+
+
+    .sidebar-section h3 {
+      color: var(--color-text);
+      margin-bottom: 16px;
+      padding: 0.5rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sidebar-section h3 .ms-Icon {
+      margin-right: 6px;
+      font-size: 16px;
+    }
+
+    .drag-item,
+    .layer-item,
+    .hierarchy-item {
+      padding: 0.5rem;
+      font-size: 0.8rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    // .left-sidebar {
+    //   width: 240px;
+
+    //   &.collapsed {
+    //     width: 0;
+    //   }
+    // }
+
+    .activity-bar {
+      width: 32px;
+
+      .activity-item {
+        width: 32px;
+        height: 32px;
+
+        i {
+          font-size: 0.8rem;
+        }
+      }
+    }
+
+    .drag-item {
+      gap: 0.5rem;
+
+      i {
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  // Accessibility improvements
+  @media (prefers-reduced-motion: reduce) {
+
+    .left-sidebar,
+    .drag-item,
+    .layer-item,
+    .hierarchy-item,
+    .hierarchy-toggle i {
+      transition: none;
+    }
+  }
+
+  // High contrast mode
+  @media (prefers-contrast: high) {
+    .left-sidebar {
+      border-right-width: 2px;
+    }
+
+    .drag-item,
+    .layer-item,
+    .hierarchy-item {
+      border-width: 2px;
+
+      &:focus {
+        outline-width: 3px;
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
+  .drag-items {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

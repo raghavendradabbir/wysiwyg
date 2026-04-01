@@ -1,0 +1,25 @@
+<!-- Blocks Panel Component Template -->
+<div class="blocks-panel" id="blocksPanel">
+  <div class="blocks-header">
+    <h3>Blocks</h3>
+    <div class="blocks-search">
+      <input type="text" id="blocksSearch" placeholder="Search blocks..." class="search-input">
+      <i class="fas fa-search search-icon"></i>
+    </div>
+  </div>
+
+  <div class="blocks-categories">
+    <button class="category-btn active" data-category="all">All</button>
+    <button class="category-btn" data-category="layout">Layout</button>
+  </div>
+
+  <div class="blocks-content" id="blocksContent">
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon">
+        <i class="fas fa-cubes"></i>
+      </div>
+      <h4>No blocks available</h4>
+      <p>Blocks will appear here when added to the editor.</p>
+    </div>
+  </div>
+</div>

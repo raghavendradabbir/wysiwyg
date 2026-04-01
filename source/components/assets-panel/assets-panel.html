@@ -1,0 +1,216 @@
+<!-- Assets Panel Component Template -->
+<div class="assets-panel" id="assetsPanel">
+  <div class="assets-header">
+    <h3>Assets</h3>
+    <div class="assets-actions">
+      <button class="upload-btn" id="uploadAssetBtn" title="Upload Asset">
+        <i class="fas fa-upload"></i>
+      </button>
+      <button class="refresh-btn" id="refreshAssetsBtn" title="Refresh Assets">
+        <i class="fas fa-sync-alt"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="assets-tabs">
+    <button class="asset-tab active" data-tab="images">
+      <i class="fas fa-image"></i>
+      <span>Images</span>
+    </button>
+    <button class="asset-tab" data-tab="icons">
+      <i class="fas fa-star"></i>
+      <span>Icons</span>
+    </button>
+    <button class="asset-tab" data-tab="media">
+      <i class="fas fa-video"></i>
+      <span>Media</span>
+    </button>
+  </div>
+
+  <div class="assets-search">
+    <input type="text" id="assetsSearch" placeholder="Search assets..." class="search-input">
+    <i class="fas fa-search search-icon"></i>
+  </div>
+
+  <div class="assets-content" id="assetsContent">
+    <!-- Images Tab -->
+    <div class="asset-tab-content active" id="imagesTab">
+      <div class="asset-upload-zone" id="imageUploadZone">
+        <div class="upload-zone-content">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Drop images here or click to upload</p>
+          <small>Supports: JPG, PNG, GIF, SVG, WebP</small>
+        </div>
+        <input type="file" id="imageFileInput" accept="image/*" multiple style="display: none;">
+      </div>
+
+      <div class="assets-grid" id="imagesGrid">
+        <!-- Sample images -->
+        <div class="asset-item" data-type="image" data-src="https://via.placeholder.com/300x200/4f46e5/white?text=Sample+1" draggable="true">
+          <div class="asset-preview">
+            <img src="https://via.placeholder.com/300x200/4f46e5/white?text=Sample+1" alt="Sample 1">
+            <div class="asset-overlay">
+              <button class="asset-action" title="Use Asset">
+                <i class="fas fa-plus"></i>
+              </button>
+              <button class="asset-action" title="Delete Asset">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+          <div class="asset-info">
+            <span class="asset-name">sample-1.jpg</span>
+            <span class="asset-size">300x200</span>
+          </div>
+        </div>
+
+        <div class="asset-item" data-type="image" data-src="https://via.placeholder.com/400x300/10b981/white?text=Sample+2" draggable="true">
+          <div class="asset-preview">
+            <img src="https://via.placeholder.com/400x300/10b981/white?text=Sample+2" alt="Sample 2">
+            <div class="asset-overlay">
+              <button class="asset-action" title="Use Asset">
+                <i class="fas fa-plus"></i>
+              </button>
+              <button class="asset-action" title="Delete Asset">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+          <div class="asset-info">
+            <span class="asset-name">sample-2.jpg</span>
+            <span class="asset-size">400x300</span>
+          </div>
+        </div>
+
+        <div class="asset-item" data-type="image" data-src="https://via.placeholder.com/250x250/f59e0b/white?text=Sample+3" draggable="true">
+          <div class="asset-preview">
+            <img src="https://via.placeholder.com/250x250/f59e0b/white?text=Sample+3" alt="Sample 3">
+            <div class="asset-overlay">
+              <button class="asset-action" title="Use Asset">
+                <i class="fas fa-plus"></i>
+              </button>
+              <button class="asset-action" title="Delete Asset">
+                <i class="fas fa-trash"></i>
+              </button>
+            </div>
+          </div>
+          <div class="asset-info">
+            <span class="asset-name">sample-3.jpg</span>
+            <span class="asset-size">250x250</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Icons Tab -->
+    <div class="asset-tab-content" id="iconsTab">
+      <div class="icon-categories">
+        <button class="icon-category-btn active" data-category="all">All</button>
+        <button class="icon-category-btn" data-category="solid">Solid</button>
+        <button class="icon-category-btn" data-category="regular">Regular</button>
+        <button class="icon-category-btn" data-category="brands">Brands</button>
+      </div>
+
+      <div class="assets-grid" id="iconsGrid">
+        <!-- Popular FontAwesome icons -->
+        <div class="asset-item icon-item" data-type="icon" data-icon="fas fa-home" data-category="solid" draggable="true">
+          <div class="asset-preview icon-preview">
+            <i class="fas fa-home"></i>
+          </div>
+          <div class="asset-info">
+            <span class="asset-name">home</span>
+          </div>
+        </div>
+
+        <div class="asset-item icon-item" data-type="icon" data-icon="fas fa-user" data-category="solid" draggable="true">
+          <div class="asset-preview icon-preview">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="asset-info">
+            <span class="asset-name">user</span>
+          </div>
+        </div>
+
+        <div class="asset-item icon-item" data-type="icon" data-icon="fas fa-heart" data-category="solid" draggable="true">
+          <div class="asset-preview icon-preview">
+            <i class="fas fa-heart"></i>
+          </div>
+          <div class="asset-info">
+            <span class="asset-name">heart</span>
+          </div>
+        </div>
+
+        <div class="asset-item icon-item" data-type="icon" data-icon="fas fa-star" data-category="solid" draggable="true">
+          <div class="asset-preview icon-preview">
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="asset-info">
+            <span class="asset-name">star</span>
+          </div>
+        </div>
+
+        <div class="asset-item icon-item" data-type="icon" data-icon="fas fa-envelope" data-category="solid" draggable="true">
+          <div class="asset-preview icon-preview">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="asset-info">
+            <span class="asset-name">envelope</span>
+          </div>
+        </div>
+
+        <div class="asset-item icon-item" data-type="icon" data-icon="fas fa-phone" data-category="solid" draggable="true">
+          <div class="asset-preview icon-preview">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div class="asset-info">
+            <span class="asset-name">phone</span>
+          </div>
+        </div>
+
+        <div class="asset-item icon-item" data-type="icon" data-icon="fas fa-cog" data-category="solid" draggable="true">
+          <div class="asset-preview icon-preview">
+            <i class="fas fa-cog"></i>
+          </div>
+          <div class="asset-info">
+            <span class="asset-name">cog</span>
+          </div>
+        </div>
+
+        <div class="asset-item icon-item" data-type="icon" data-icon="fas fa-search" data-category="solid" draggable="true">
+          <div class="asset-preview icon-preview">
+            <i class="fas fa-search"></i>
+          </div>
+          <div class="asset-info">
+            <span class="asset-name">search</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Media Tab -->
+    <div class="asset-tab-content" id="mediaTab">
+      <div class="asset-upload-zone" id="mediaUploadZone">
+        <div class="upload-zone-content">
+          <i class="fas fa-video"></i>
+          <p>Drop media files here or click to upload</p>
+          <small>Supports: MP4, WebM, MP3, WAV</small>
+        </div>
+        <input type="file" id="mediaFileInput" accept="video/*,audio/*" multiple style="display: none;">
+      </div>
+
+      <div class="assets-grid" id="mediaGrid">
+        <!-- Sample media files would go here -->
+        <div class="asset-item" data-type="video" data-src="sample-video.mp4" draggable="true">
+          <div class="asset-preview video-preview">
+            <i class="fas fa-play-circle"></i>
+            <span class="media-duration">0:30</span>
+          </div>
+          <div class="asset-info">
+            <span class="asset-name">sample-video.mp4</span>
+            <span class="asset-size">1920x1080</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

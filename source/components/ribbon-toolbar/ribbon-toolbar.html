@@ -1,0 +1,168 @@
+<!-- Ribbon Toolbar Component Template -->
+<div class="ribbon-container">
+  <!-- Ribbon Tabs -->
+  <div class="ribbon-tabs">
+    <button class="ribbon-tab active" data-tab="home">Home</button>
+    <button class="ribbon-tab" data-tab="design">Design</button>
+    <button class="ribbon-tab" data-tab="view">View</button>
+  </div>
+
+  <!-- Ribbon Content -->
+  <div class="ribbon-content">
+    <!-- Home Tab -->
+    <div class="ribbon-panel active" id="home-panel">
+      <div class="ribbon-group">
+        <div class="ribbon-group-title">Clipboard</div>
+        <div class="ribbon-buttons">
+          <button class="ribbon-btn large" id="undo" title="Undo">
+            <i class="fas fa-undo" aria-hidden="true"></i>
+            <span>Undo</span>
+          </button>
+          <button class="ribbon-btn large" id="redo" title="Redo">
+            <i class="fas fa-redo" aria-hidden="true"></i>
+            <span>Redo</span>
+          </button>
+        </div>
+      </div>
+      <div class="ribbon-separator"></div>
+
+      <div class="ribbon-group">
+        <div class="ribbon-group-title">File</div>
+        <div class="ribbon-buttons">
+          <button class="ribbon-btn large" id="savePage" title="Save" disabled>
+            <i class="fas fa-save" aria-hidden="true"></i>
+            <span>Save</span>
+          </button>
+          <button class="ribbon-btn large" id="saveAllPages" title="Save All Pages" disabled>
+            <i class="fas fa-copy" aria-hidden="true"></i>
+            <span>Save All</span>
+          </button>
+          <button class="ribbon-btn large" id="load" title="Load">
+            <i class="fas fa-folder-open" aria-hidden="true"></i>
+            <span>Load</span>
+          </button>
+        </div>
+      </div>
+      <div class="ribbon-separator"></div>
+
+      <div class="ribbon-group">
+        <div class="ribbon-group-title">Export</div>
+        <div class="ribbon-buttons">
+          <button class="ribbon-btn large" id="viewHTML" title="View HTML">
+            <i class="fas fa-code" aria-hidden="true"></i>
+            <span>View HTML</span>
+          </button>
+          <button class="ribbon-btn large" id="exportHTML" title="Export HTML">
+            <i class="fas fa-download" aria-hidden="true"></i>
+            <span>Export</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Design Tab -->
+    <div class="ribbon-panel" id="design-panel">
+      <div class="ribbon-group">
+        <div class="ribbon-group-title">CH5 Themes</div>
+        <div class="ribbon-buttons">
+          <div class="theme-selector">
+            <div class="ribbon-inline-field">
+              <select id="ch5Theme" class="ribbon-select" aria-describedby="ch5ThemeIcon">
+                <option value="light">☀️ Light</option>
+                <option value="dark">🌙 Dark</option>
+                <option value="high-contrast">⚡ High Contrast</option>
+                <option value="zoom-light">🔆 Zoom Light</option>
+                <option value="zoom-dark">🌑 Zoom Dark</option>
+              </select>
+              <button type="button" id="ch5ThemeInfoBtn" class="info-icon"
+                title="Light theme - Light theme with dark text on light backgrounds">
+                <i class="fas fa-info-circle" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="ribbon-separator"></div>
+      <div class="ribbon-group" title="App Theme (Editor UI)">
+        <div class="ribbon-group-title">App Theme</div>
+        <div class="ribbon-buttons">
+          <button class="ribbon-btn small" id="appThemeLight" title="App Theme: Light">
+            <i class="fas fa-sun" aria-hidden="true"></i>
+          </button>
+          <button class="ribbon-btn small" id="appThemeDark" title="App Theme: Dark">
+            <i class="fas fa-moon" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <div class="ribbon-separator"></div>
+      <div class="ribbon-group">
+        <div class="ribbon-group-title">Layout</div>
+        <div class="ribbon-buttons">
+          <div class="layout-selector">
+            <select id="layoutMode" class="ribbon-select">
+              <option value="freeform">🔓 Freeform</option>
+              <option value="responsive">🧱 Responsive</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View Tab -->
+    <div class="ribbon-panel" id="view-panel">
+      <div class="ribbon-group">
+        <div class="ribbon-group-title">Zoom</div>
+        <div class="ribbon-buttons">
+          <button class="ribbon-btn small" id="zoomOut" title="Zoom Out">
+            <i class="fas fa-search-minus" aria-hidden="true"></i>
+          </button>
+          <input type="number" class="zoom-input ribbon-input" id="zoomLevel" min="25" max="300" step="5"
+            title="Enter zoom percentage">
+          <button class="ribbon-btn small" id="zoomIn" title="Zoom In">
+            <i class="fas fa-search-plus" aria-hidden="true"></i>
+          </button>
+          <button class="ribbon-btn small" id="zoomReset" title="Reset Zoom">
+            <i class="fas fa-expand-arrows-alt" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <div class="ribbon-separator"></div>
+
+      <div class="ribbon-group">
+        <div class="ribbon-group-title">Device</div>
+        <div class="ribbon-buttons">
+          <div class="device-selector">
+            <select id="deviceType" class="ribbon-select">
+              <option value="desktop">🖥️ Desktop</option>
+              <option value="iphone-se">📱 iPhone SE</option>
+              <option value="iphone-12">📱 iPhone 12</option>
+              <option value="iphone-14-plus">📱 iPhone 14 Plus</option>
+              <option value="samsung-s21">📱 Samsung S21</option>
+              <option value="samsung-s21-ultra">📱 Samsung S21 Ultra</option>
+              <option value="pixel-5">📱 Google Pixel 5</option>
+              <option value="pixel-7-pro">📱 Google Pixel 7 Pro</option>
+              <option value="ipad">📱 iPad</option>
+              <option value="ipad-pro">📱 iPad Pro</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="ribbon-separator"></div>
+
+      <div class="ribbon-group">
+        <div class="ribbon-group-title">Help</div>
+        <div class="ribbon-buttons">
+          <button class="ribbon-btn large" id="viewHelp" title="View Help">
+            <i class="fas fa-question-circle" aria-hidden="true"></i>
+            <span>View Help</span>
+          </button>
+          <button class="ribbon-btn large" id="checkUpdates" title="Check for Updates">
+            <i class="fas fa-sync" aria-hidden="true"></i>
+            <span>Check Updates</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

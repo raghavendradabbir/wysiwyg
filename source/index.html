@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WYSIWYG Editor</title>
+
+  <!-- Crestron CH5 Theme CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/@crestron/ch5-theme@2.16.0/output/themes/css/ch5-theme.css"
+    id="ch5-theme">
+  <link rel="stylesheet" href="https://unpkg.com/@crestron/ch5-theme@2.16.0/output/themes/css/external.css"
+    id="ch5-theme-external">
+
+  <!-- Crestron CH5 Components Library -->
+  <script src="https://unpkg.com/@crestron/ch5-crcomlib@2.16.0/build_bundles/umd/cr-com-lib.js"></script>
+
+  <!-- Font Awesome Icons (offline alternative) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Custom Styles (compiled from SCSS) -->
+  <link rel="stylesheet" href="../dist/styles.css">
+  
+  <script type="module" src="./components/component-loader.js"></script>
+  <script type="module" src="./js/blocks-config.js"></script>
+</head>
+
+<body>
+  <!-- Loading State -->
+  <div class="loading-state" id="loadingState">
+    <div class="loading-spinner">
+      <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+      <span>Loading WYSIWYG Editor...</span>
+    </div>
+  </div>
+
+  <!-- Main Editor Container -->
+  <div class="editor-container" id="editorContainer" style="display: none;">
+    <!-- Startup Modal Component -->
+    <startup-modal></startup-modal>
+
+    <div class="editor-layout-wrapper">
+      <ribbon-toolbar></ribbon-toolbar>
+
+      <div class="editor-layout">
+        <left-sidebar id="leftSidebar"></left-sidebar>
+
+        <div class="main-editor">
+          <div class="editor-header">
+            <div class="editor-header-left">
+              <div class="current-context" id="currentContext">
+                <!-- Current solution/project/page context -->
+              </div>
+            </div>
+            <div class="editor-header-right">
+              <label id="deviceInfo"></label>
+              <div id="expandDeviceFrame"></div>
+              <!-- Reopen Right Sidebar Button (visible only when right sidebar is collapsed) -->
+              <button id="reopenRightSidebarBtn" class="header-toggle-btn" title="Open Right Sidebar" style="display:none; width:28px; height:28px; border:1px solid #e0e0e0; border-radius:4px; background:#fff; color:#666; align-items:center; justify-content:center; cursor:pointer;">
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+          
+          <!-- Page Tabs Component -->
+          <page-tabs id="pageTabs"></page-tabs>
+          
+          <div class="editor-content">
+            <div class="device-frame desktop" id="deviceFrame">
+              <div class="device-screen">
+                <!-- Canvas container - individual canvases will be created dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Sidebar Component -->
+        <right-sidebar id="rightSidebar"></right-sidebar>
+      </div>
+    </div>
+
+    <!-- Context Menu Component -->
+    <context-menu></context-menu>
+  </div>
+
+
+  <!-- Custom JavaScript -->
+  <script type="module">
+    // Import and initialize the WYSIWYG Editor
+    import { MyWYSIWYGEditor } from './script.js';
+
+    function initEditor() {
+      // Hide loading state and show editor
+      const loadingState = document.getElementById('loadingState');
+      const editorContainer = document.getElementById('editorContainer');
+
+      if (loadingState) loadingState.style.display = 'none';
+      if (editorContainer) editorContainer.style.display = 'block';
+
+      try {
+        const editor = new MyWYSIWYGEditor();
+
+        // Make editor globally accessible for debugging
+        window.wysiwygEditor = editor;
+        // Initialize and show startup modal
+        const startupEl = document.querySelector('startup-modal');
+        if (startupEl && typeof startupEl.waitForReady === 'function') {
+          startupEl.waitForReady().then(() => {
+            try {
+              // Always show the Projects Manager on reload as requested
+              if (typeof startupEl.openManager === 'function') {
+                startupEl.openManager();
+              } else {
+                startupEl.show();
+              }
+
+              // When a project is created, mark initialized and open it immediately in the editor
+              startupEl.addEventListener('project-created', (e) => {
+                try {
+                  localStorage.setItem('wysiwyg-editor-initialized', 'true');
+                  // Load from storage so we open the just-created project (we unshift new projects to index 0)
+                  if (editor && typeof editor.loadPersistedProject === 'function') {
+                    editor.loadPersistedProject();
+                  }
+                } catch (err) {
+                  // Silently handle project creation errors
+                }
+              });
+
+              // When user clicks Open in the manager, load persisted project
+              startupEl.addEventListener('project-open-requested', (event) => {
+                try {
+                  const projectId = event.detail?.id;
+                  if (editor && typeof editor.loadPersistedProject === 'function') {
+                    editor.loadPersistedProject(projectId);
+                  }
+                } catch (err) {
+                  // Silently handle project open errors
+                }
+              });
+            } catch (e) {
+              // Silently handle startup modal errors
+            }
+          });
+        }
+      } catch (error) {
+        console.error('Error initializing WYSIWYG Editor:', error);
+      }
+    }
+
+    // Initialize on DOM ready
+    document.addEventListener('DOMContentLoaded', () => {
+      // Allow a microtask for custom elements to render their inner HTML
+      setTimeout(initEditor, 0);
+    }, { once: true });
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+# CSS Class Usage Report
+- Total defined: 273
+- Used: 174
+- Unused: 99
+
+## Unused (top 100)
+- actions — defined in dist/styles.css, scss/_editor-ui.scss
+- base-btn — defined in components/ribbon-toolbar/_ribbon-toolbar.scss, scss/_editor-ui.scss
+- btn-delete — defined in dist/styles.css, scss/_editor-ui.scss
+- btn-icon — defined in dist/styles.css, scss/_editor-ui.scss
+- btn-open — defined in dist/styles.css, scss/_editor-ui.scss
+- canvas-element — defined in dist/styles.css, scss/_canvas-elements.scss
+- color-input — defined in dist/styles.css, scss/_editor-ui.scss
+- color-picker-section — defined in dist/styles.css, scss/_editor-ui.scss
+- com — defined in dist/styles.css, scss/_canvas-elements.scss, scss/_editor-ui.scss
+- compact — defined in components/context-menu/context-menu.css, components/context-menu/context-menu.scss
+- context-item — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss
+- context-separator — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss
+- controls-right — defined in dist/styles.css, scss/_editor-ui.scss
+- dark-btn — defined in components/ribbon-toolbar/_ribbon-toolbar.scss, scss/_editor-ui.scss
+- device-info — defined in dist/styles.css, scss/_editor-ui.scss
+- device-settings — defined in dist/styles.css, scss/_editor-ui.scss
+- dirty — defined in dist/styles.css, scss/_editor-ui.scss
+- e — defined in dist/styles.css, scss/_canvas-elements.scss
+- error — defined in components/right-sidebar/_right-sidebar.scss, dist/styles.css
+- error-message — defined in components/right-sidebar/_right-sidebar.scss, dist/styles.css, scss/_editor-ui.scss
+- fade-in — defined in components/context-menu/context-menu.css, components/context-menu/context-menu.scss
+- form-error — defined in components/startup-modal/_startup-modal.scss, dist/styles.css, scss/_editor-ui.scss
+- form-help — defined in components/startup-modal/_startup-modal.scss, dist/styles.css, scss/_editor-ui.scss
+- googleapis — defined in dist/styles.css, scss/_canvas-elements.scss, scss/_editor-ui.scss
+- grouped — defined in dist/styles.css, scss/_editor-ui.scss
+- h1 — defined in dist/styles.css, scss/_canvas-elements.scss
+- h3 — defined in dist/styles.css, scss/_canvas-elements.scss
+- hide — defined in dist/styles.css, scss/_editor-ui.scss
+- invalid — defined in dist/styles.css, scss/_editor-ui.scss
+- ipad — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss, dist/styles.css, scss/_editor-ui.scss
+- ipad-pro — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss, dist/styles.css, scss/_editor-ui.scss
+- iphone-12 — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss, dist/styles.css, scss/_editor-ui.scss
+- iphone-14-plus — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss, dist/styles.css, scss/_editor-ui.scss
+- iphone-se — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss, dist/styles.css, scss/_editor-ui.scss
+- last-modified — defined in dist/styles.css, scss/_editor-ui.scss
+- layer-btn — defined in dist/styles.css, scss/_editor-ui.scss
+- layout-mode — defined in dist/styles.css, scss/_editor-ui.scss
+- layout-modes — defined in dist/styles.css, scss/_editor-ui.scss
+- loading — defined in components/right-sidebar/_right-sidebar.scss, dist/styles.css
+- mobile — defined in dist/styles.css, scss/_editor-ui.scss
+- ms-Icon — defined in components/left-sidebar/_left-sidebar.scss, dist/styles.css, scss/_editor-ui.scss
+- n — defined in dist/styles.css, scss/_canvas-elements.scss
+- ne — defined in dist/styles.css, scss/_canvas-elements.scss
+- no-pages — defined in dist/styles.css, scss/_editor-ui.scss
+- no-projects — defined in dist/styles.css, scss/_editor-ui.scss
+- no-solutions — defined in dist/styles.css, scss/_editor-ui.scss
+- nw — defined in dist/styles.css, scss/_canvas-elements.scss
+- org — defined in components/right-sidebar/_right-sidebar.scss, dist/styles.css
+- page-action-btn — defined in dist/styles.css, scss/_editor-ui.scss
+- page-actions — defined in dist/styles.css, scss/_editor-ui.scss
+- page-header — defined in dist/styles.css, scss/_editor-ui.scss
+- page-icon — defined in dist/styles.css, scss/_editor-ui.scss
+- page-item — defined in dist/styles.css, scss/_editor-ui.scss
+- page-name — defined in dist/styles.css, scss/_editor-ui.scss
+- page-name-input — defined in dist/styles.css, scss/_editor-ui.scss
+- pages-list — defined in dist/styles.css, scss/_editor-ui.scss
+- pixel-5 — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss, dist/styles.css, scss/_editor-ui.scss
+- pixel-7-pro — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss, dist/styles.css, scss/_editor-ui.scss
+- primary-btn — defined in components/ribbon-toolbar/_ribbon-toolbar.scss, scss/_editor-ui.scss
+- project-name — defined in dist/styles.css, scss/_editor-ui.scss
+- project-row — defined in dist/styles.css, scss/_editor-ui.scss
+- property-row — defined in dist/styles.css, scss/_editor-ui.scss
+- radio-group — defined in dist/styles.css, scss/_editor-ui.scss
+- radio-option — defined in dist/styles.css, scss/_editor-ui.scss
+- resize-e — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss
+- resize-handle — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss, dist/styles.css, scss/_canvas-elements.scss
+- resize-n — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss
+- resize-ne — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss
+- resize-nw — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss
+- resize-s — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss
+- resize-se — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss
+- resize-sw — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss
+- resize-w — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss
+- s — defined in dist/styles.css, scss/_canvas-elements.scss
+- samsung-s21 — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss, dist/styles.css, scss/_editor-ui.scss
+- samsung-s21-ultra — defined in components/main-editor/main-editor.css, components/main-editor/main-editor.scss, dist/styles.css, scss/_editor-ui.scss
+- se — defined in dist/styles.css, scss/_canvas-elements.scss
+- setting-group — defined in dist/styles.css, scss/_editor-ui.scss
+- slide-in — defined in components/context-menu/context-menu.css, components/context-menu/context-menu.scss
+- solution-group — defined in components/startup-modal/_startup-modal.scss, dist/styles.css, scss/_editor-ui.scss
+- solution-header — defined in dist/styles.css, scss/_editor-ui.scss
+- solution-header-row — defined in dist/styles.css, scss/_editor-ui.scss
+- solution-name — defined in dist/styles.css, scss/_editor-ui.scss
+- sw — defined in dist/styles.css, scss/_canvas-elements.scss
+- tablet — defined in dist/styles.css, scss/_editor-ui.scss
+- theme-icon — defined in dist/styles.css, scss/_editor-ui.scss
+- toolbar — defined in dist/styles.css, scss/_editor-ui.scss
+- tree-count — defined in dist/styles.css, scss/_editor-ui.scss
+- tree-item — defined in dist/styles.css, scss/_editor-ui.scss
+- tree-page — defined in dist/styles.css, scss/_editor-ui.scss
+- tree-pages-group — defined in dist/styles.css, scss/_editor-ui.scss
+- tree-project — defined in dist/styles.css, scss/_editor-ui.scss
+- tree-solution — defined in dist/styles.css, scss/_editor-ui.scss
+- valid — defined in dist/styles.css, scss/_editor-ui.scss
+- version — defined in dist/styles.css, scss/_editor-ui.scss
+- vertical — defined in dist/styles.css, scss/_canvas-elements.scss
+- w — defined in dist/styles.css, scss/_canvas-elements.scss
+- w3 — defined in components/right-sidebar/_right-sidebar.scss, dist/styles.css
+- zoom-btn — defined in dist/styles.css, scss/_editor-ui.scss
+
+## Notes
+- Dynamic class names constructed at runtime may not be detected.
+- If a class is applied by external libraries or via inline stylesheets injected at runtime, it may be marked unused.

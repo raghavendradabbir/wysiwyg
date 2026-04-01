@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Left Sidebar Component Test</title>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Component Styles -->
+    <link rel="stylesheet" href="../source/components/left-sidebar/left-sidebar.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f0f0;
+        }
+        
+        .test-container {
+            display: flex;
+            height: 100vh;
+        }
+        
+        .test-content {
+            flex: 1;
+            padding: 2rem;
+            background: white;
+            margin: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .test-controls {
+            margin-bottom: 2rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        
+        .test-controls button {
+            margin-right: 1rem;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: #007acc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .test-controls button:hover {
+            background: #005a9e;
+        }
+        
+        .event-log {
+            background: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            padding: 1rem;
+            height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 0.85rem;
+        }
+        
+        .event-log .event {
+            margin-bottom: 0.5rem;
+            padding: 0.25rem;
+            background: white;
+            border-radius: 2px;
+        }
+        
+        .event-log .event.hierarchy-action {
+            background: #e3f2fd;
+        }
+        
+        .event-log .event.component-drag {
+            background: #f3e5f5;
+        }
+        
+        .event-log .event.layer-action {
+            background: #e8f5e8;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <!-- Left Sidebar Component -->
+        <left-sidebar id="testSidebar"></left-sidebar>
+        
+        <!-- Test Content Area -->
+        <div class="test-content">
+            <h1>Left Sidebar Component Test</h1>
+            
+            <div class="test-controls">
+                <h3>Test Controls</h3>
+                <button onclick="toggleSidebar()">Toggle Sidebar</button>
+                <button onclick="switchPanel('explorer')">Switch to Explorer</button>
+                <button onclick="switchPanel('components')">Switch to Components</button>
+                <button onclick="switchPanel('ch5-components')">Switch to CH5 Components</button>
+                <button onclick="switchPanel('layers')">Switch to Layers</button>
+                <button onclick="updateLayers()">Update Layers</button>
+                <button onclick="updateHierarchy()">Update Hierarchy</button>
+                <button onclick="clearLog()">Clear Log</button>
+            </div>
+            
+            <h3>Event Log</h3>
+            <div class="event-log" id="eventLog">
+                <div class="event">Component initialized. Ready for testing...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Component Script -->
+    <script src="../source/components/left-sidebar/left-sidebar.js"></script>
+    
+    <script>
+        // Test functionality
+        const sidebar = document.getElementById('testSidebar');
+        const eventLog = document.getElementById('eventLog');
+        
+        function logEvent(message, type = 'info') {
+            const event = document.createElement('div');
+            event.className = `event ${type}`;
+            event.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            eventLog.appendChild(event);
+            eventLog.scrollTop = eventLog.scrollHeight;
+        }
+        
+        // Event listeners for component events
+        sidebar.addEventListener('hierarchy-action', (e) => {
+            logEvent(`Hierarchy Action: ${e.detail.action} ${JSON.stringify(e.detail)}`, 'hierarchy-action');
+        });
+        
+        sidebar.addEventListener('component-drag-start', (e) => {
+            logEvent(`Component Drag Start: ${e.detail.componentType}`, 'component-drag');
+        });
+        
+        sidebar.addEventListener('component-drag-end', (e) => {
+            logEvent(`Component Drag End: ${e.detail.componentType}`, 'component-drag');
+        });
+        
+        sidebar.addEventListener('component-selected', (e) => {
+            logEvent(`Component Selected: ${e.detail.componentType}`, 'component-drag');
+        });
+        
+        sidebar.addEventListener('layer-action', (e) => {
+            logEvent(`Layer Action: ${e.detail.action}`, 'layer-action');
+        });
+        
+        sidebar.addEventListener('layer-selected', (e) => {
+            logEvent(`Layer Selected: ${e.detail.layerId}`, 'layer-action');
+        });
+        
+        sidebar.addEventListener('panel-switched', (e) => {
+            logEvent(`Panel Switched: ${e.detail.panel}`, 'info');
+        });
+        
+        sidebar.addEventListener('sidebar-toggled', (e) => {
+            logEvent(`Sidebar Toggled: ${e.detail.collapsed ? 'collapsed' : 'expanded'}`, 'info');
+        });
+        
+        // Test functions
+        function toggleSidebar() {
+            sidebar.toggleCollapse();
+        }
+        
+        function switchPanel(panelId) {
+            sidebar.switchToPanel(panelId);
+        }
+        
+        function updateLayers() {
+            const sampleLayers = [
+                { id: '1', name: 'Background', type: 'container', visible: true, selected: false },
+                { id: '2', name: 'Header', type: 'heading', visible: true, selected: true },
+                { id: '3', name: 'Button', type: 'ch5-button', visible: true, selected: false },
+                { id: '4', name: 'Footer', type: 'text', visible: false, selected: false }
+            ];
+            sidebar.updateLayersList(sampleLayers);
+            logEvent('Updated layers list with sample data', 'info');
+        }
+        
+        function updateHierarchy() {
+            const sampleHierarchy = {
+                solutions: [
+                    {
+                        id: 'sol1',
+                        name: 'My Website',
+                        type: 'solution',
+                        expanded: true,
+                        active: false,
+                        children: [
+                            {
+                                id: 'proj1',
+                                name: 'Main Site',
+                                type: 'project',
+                                expanded: true,
+                                active: false,
+                                children: [
+                                    { id: 'page1', name: 'Home', type: 'page', active: true },
+                                    { id: 'page2', name: 'About', type: 'page', active: false },
+                                    { id: 'page3', name: 'Contact', type: 'page', active: false }
+                                ]
+                            },
+                            {
+                                id: 'proj2',
+                                name: 'Admin Panel',
+                                type: 'project',
+                                expanded: false,
+                                active: false,
+                                children: [
+                                    { id: 'page4', name: 'Dashboard', type: 'page', active: false }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            };
+            sidebar.updateHierarchyData(sampleHierarchy);
+            logEvent('Updated hierarchy with sample data', 'info');
+        }
+        
+        function clearLog() {
+            eventLog.innerHTML = '<div class="event">Event log cleared...</div>';
+        }
+        
+        // Initialize with sample data after component loads
+        setTimeout(() => {
+            updateHierarchy();
+            updateLayers();
+            logEvent('Component test initialized with sample data', 'info');
+        }, 1000);
+    </script>
+</body>
+</html>

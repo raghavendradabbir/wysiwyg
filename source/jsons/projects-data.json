@@ -1,0 +1,23 @@
+{
+  "projects": [
+    {
+      "projectName": "Project 1",
+      "solutionName": "Solution 1",
+      "lastModified": "2025-09-24T12:41:43+05:30",
+      "createdOn": "2025-09-24T12:41:43+05:30",
+      "createdVersion": "1.0.0",
+      "pages": [
+        {
+          "name": "Page 1",
+          "elements": [
+            {
+              "type": "button",
+              "id": "button1",
+              "text": "Button 1"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

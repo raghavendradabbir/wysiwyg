@@ -1,0 +1,22 @@
+{
+  "name": "wysiwyg-editor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Advanced WYSIWYG Editor with SCSS build using Sass",
+  "scripts": {
+    "dev": "sass source/scss/main.scss:dist/styles.css --style=expanded --watch",
+    "build": "sass source/scss/main.scss:dist/styles.css --style=expanded",
+    "build:min": "sass source/scss/main.scss:dist/styles.min.css --style=compressed",
+    "serve": "live-server --port=5173 --open=./source/index.html",
+    "test": "playwright test --config=tests/playwright.config.js",
+    "test:ui": "playwright test --ui --config=tests/playwright.config.js",
+    "test:debug": "playwright test --debug --config=tests/playwright.config.js",
+    "test:headed": "playwright test --headed --config=tests/playwright.config.js",
+    "test:report": "playwright show-report tests/playwright-report"
+  },
+  "devDependencies": {
+    "sass": "^1.77.0",
+    "live-server": "^1.2.2",
+    "@playwright/test": "^1.40.0"
+  }
+}

@@ -1,0 +1,526 @@
+$ribbon-min-height: 80px;
+
+@mixin primary-btn {
+  background: var(--color-accent);
+  color: var(--color-white);
+  border-color: var(--color-accent);
+  
+  &:hover {
+    background: var(--color-accent-strong);
+    border-color: var(--color-accent-strong);
+  }
+}
+
+@mixin base-btn {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: var(--transition-base);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text);
+  
+  &:hover {
+    background: var(--color-surface-hover);
+    border-color: var(--color-border-strong);
+  }
+  
+  &:active {
+    transform: translateY(1px);
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+/* Ribbon Toolbar Component Styles */
+ribbon-toolbar {
+  display: block;
+
+  .ribbon-container {
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    // box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .ribbon-tabs {
+    display: flex;
+    background: var(--color-surface-elevated);
+    border-bottom: 1px solid var(--color-border);
+    padding: 0 1rem;
+  }
+
+  .ribbon-tab {
+    background: none;
+    border: none;
+    padding: 0.7rem 2.25rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+    position: relative;
+
+    &:hover {
+      background: var(--color-surface-hover);
+      color: var(--color-text);
+    }
+
+    &.active {
+      color: var(--color-accent);
+      border-bottom-color: var(--color-accent);
+      background: var(--color-surface);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .ribbon-content {
+    padding: 10px;
+    min-height: $ribbon-min-height;
+    transition: max-height 0.25s ease, padding-top 0.2s ease, padding-bottom 0.2s ease;
+  }
+
+  /* Collapsed state: hide ribbon content area */
+  .ribbon-container.collapsed {
+    border-bottom: none;
+
+    .ribbon-tab.active {
+      background: transparent;
+      color: var(--color-text-muted);
+      border-bottom-color: transparent;
+    }
+
+    .ribbon-content {
+      max-height: 0;
+      min-height: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+      overflow: hidden;
+    }
+
+    .ribbon-panel.active {
+      display: none;
+    }
+  }
+
+  .ribbon-panel {
+    display: none;
+    align-items: center;
+    gap: 1rem;
+    min-height: $ribbon-min-height;
+
+    &.active {
+      display: flex;
+      align-items: flex-start;
+    }
+  }
+
+  .ribbon-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    min-width: 0;
+  }
+
+  .ribbon-group-title {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .ribbon-buttons {
+    display: flex;
+    gap: 0.25rem;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .ribbon-btn {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    color: var(--color-text);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+
+    &.large {
+      padding: 0.5rem;
+      min-width: 60px;
+      min-height: 50px;
+
+      i {
+        font-size: 1.2rem;
+      }
+
+      span {
+        font-size: 0.7rem;
+        font-weight: 500;
+      }
+    }
+
+    &.small {
+      padding: 0.5rem;
+      min-width: 32px;
+      min-height: 32px;
+      flex-direction: row;
+
+      i {
+        font-size: 1rem;
+      }
+    }
+
+    &:hover:not(:disabled):not(.active) {
+      background: var(--color-surface-hover);
+      border-color: var(--color-accent);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+
+    &:active:not(:disabled) {
+      transform: translateY(0);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      background: var(--color-disabled-bg);
+      color: var(--color-disabled);
+    }
+
+    &.active {
+      background: var(--color-accent);
+      color: var(--color-white);
+      border-color: var(--color-accent);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .ribbon-separator {
+    width: 1px;
+    min-height: $ribbon-min-height;
+    background: var(--color-border);
+    margin: 0 0.5rem;
+  }
+
+  .ribbon-select {
+    padding: 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.8rem;
+    cursor: pointer;
+    min-width: 120px;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.1);
+    }
+
+    &:hover {
+      border-color: var(--color-accent);
+    }
+  }
+
+  .ribbon-input {
+    padding: 0.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font-size: 0.8rem;
+    width: 60px;
+    text-align: center;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: var(--color-accent);
+      box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.1);
+    }
+
+    &.zoom-input {
+      width: 70px;
+    }
+  }
+
+  .ribbon-inline-field {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .info-icon {
+    background: none;
+    border: none;
+    color: var(--color-text-muted);
+    cursor: pointer;
+    padding: 0.25rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background: var(--color-surface-hover);
+      color: var(--color-accent);
+    }
+
+    &:focus {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
+    }
+  }
+
+  .theme-selector,
+  .layout-selector,
+  .device-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  // Responsive design
+  @media (max-width: 1024px) {
+    .ribbon-content {
+      // padding: 0.75rem;
+    }
+
+    .ribbon-group {
+      gap: 0.25rem;
+    }
+
+    .ribbon-btn.large {
+      min-width: 50px;
+      min-height: 45px;
+      padding: 0.4rem;
+
+      i {
+        font-size: 1rem;
+      }
+
+      span {
+        font-size: 0.65rem;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .ribbon-tabs {
+      padding: 0 0.5rem;
+    }
+
+    .ribbon-tab {
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+    }
+
+    .ribbon-content {
+      // padding: 0.5rem;
+      overflow-x: auto;
+    }
+
+    .ribbon-panel {
+      min-width: max-content;
+    }
+
+    .ribbon-group {
+      min-width: auto;
+    }
+
+    .ribbon-btn.large {
+      min-width: 45px;
+      min-height: 40px;
+
+      span {
+        display: none;
+      }
+    }
+
+    .ribbon-select {
+      min-width: 100px;
+      font-size: 0.75rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .ribbon-tabs {
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .ribbon-tab {
+      flex-shrink: 0;
+      padding: 0.5rem 0.75rem;
+    }
+
+    .ribbon-content {
+      // padding: 0.25rem;
+    }
+
+    .ribbon-separator {
+      display: none;
+    }
+  }
+}
+
+// Dark theme support
+@media (prefers-color-scheme: dark) {
+  ribbon-toolbar {
+    --background-color: #1e1e1e;
+    --background-secondary: #2d2d30;
+    --background-hover: #3e3e42;
+    --background-disabled: #2d2d30;
+    --text-color: #cccccc;
+    --text-secondary: #969696;
+    --text-disabled: #656565;
+    --border-color: #3e3e42;
+    --primary-color: #0078d4;
+  }
+}
+
+
+/* Inline field for theme icon + select in ribbon */
+.ribbon-inline-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+/* Info icon button next to selects in ribbon */
+.info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text-muted);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.info-icon:hover {
+  background: var(--color-surface-hover);
+  border-color: var(--color-border-strong);
+}
+
+.info-icon:active {
+  background: var(--color-surface-active);
+}
+
+
+// Consolidated ribbon button styles
+.ribbon-btn {
+  @include base-btn;
+  background: transparent;
+  border: 1px solid transparent;
+  flex-direction: column;
+  text-align: center;
+  font-size: 11px;
+  transition: all 0.3s ease;
+
+  &.large {
+    padding: 8px 12px;
+    min-width: 60px;
+    min-height: 50px;
+
+    i {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+  }
+
+  &.small {
+    padding: 6px 8px;
+    min-width: 32px;
+    min-height: 32px;
+
+    i {
+      font-size: 14px;
+    }
+  }
+
+  &:hover {
+    background: var(--color-surface-hover);
+    border-color: var(--color-border-strong);
+  }
+
+  &:active {
+    background: var(--color-surface-active);
+  }
+
+  &.active {
+    @include primary-btn;
+  }
+
+}
+
+// Consolidated toolbar button styles
+.toolbar-btn {
+  @include base-btn;
+  padding: 6px 10px;
+
+  &.active {
+    @include primary-btn;
+  }
+
+}
+
+.ribbon-select {
+  padding: 4px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-surface);
+  font-size: 12px;
+  color: var(--color-text);
+  min-width: 100px;
+}
+
+.ribbon-input {
+  padding: 4px 8px;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-surface);
+  font-size: 12px;
+  color: var(--color-text);
+  width: 60px;
+  text-align: center;
+}

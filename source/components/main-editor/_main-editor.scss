@@ -1,0 +1,481 @@
+/* Main Editor Component Styles */
+main-editor {
+  display: block;
+  flex: 1;
+  
+  .main-editor {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    background: var(--editor-background, #ffffff);
+  }
+
+  .editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    background: var(--editor-header-background, #f8f9fa);
+    border-bottom: 1px solid var(--border-color, #e0e0e0);
+    min-height: 40px;
+  }
+
+  .editor-header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .editor-header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .current-context {
+    font-size: 0.9rem;
+    color: var(--text-secondary, #666);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .context-separator {
+      color: var(--text-tertiary, #999);
+    }
+
+    .context-item {
+      color: var(--text-color, #333);
+      font-weight: 500;
+
+      &:hover {
+        color: var(--primary-color, #007acc);
+        cursor: pointer;
+      }
+    }
+  }
+
+  #deviceInfo {
+    font-size: 0.8rem;
+    color: var(--text-secondary, #666);
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    background: var(--background-secondary, #f0f0f0);
+    border-radius: 4px;
+  }
+  
+  .editor-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: var(--canvas-background, #f5f5f5);
+    overflow: auto;
+    position: relative;
+  }
+
+  .device-frame {
+    background: var(--device-frame-background, #333);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transition: all 0.3s ease;
+
+    &.desktop {
+      width: 1200px;
+      height: 800px;
+      border-radius: 8px;
+      padding: 0;
+      background: transparent;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    &.iphone-se {
+      width: 375px;
+      height: 667px;
+      border-radius: 25px;
+      padding: 60px 20px;
+    }
+
+    &.iphone-12 {
+      width: 390px;
+      height: 844px;
+      border-radius: 30px;
+      padding: 60px 20px;
+    }
+
+    &.iphone-14-plus {
+      width: 428px;
+      height: 926px;
+      border-radius: 30px;
+      padding: 60px 20px;
+    }
+
+    &.samsung-s21 {
+      width: 384px;
+      height: 854px;
+      border-radius: 25px;
+      padding: 50px 15px;
+    }
+
+    &.samsung-s21-ultra {
+      width: 412px;
+      height: 915px;
+      border-radius: 25px;
+      padding: 50px 15px;
+    }
+
+    &.pixel-5 {
+      width: 393px;
+      height: 851px;
+      border-radius: 25px;
+      padding: 50px 15px;
+    }
+
+    &.pixel-7-pro {
+      width: 412px;
+      height: 892px;
+      border-radius: 25px;
+      padding: 50px 15px;
+    }
+
+    &.ipad {
+      width: 768px;
+      height: 1024px;
+      border-radius: 20px;
+      padding: 40px 20px;
+    }
+
+    &.ipad-pro {
+      width: 834px;
+      height: 1194px;
+      border-radius: 20px;
+      padding: 40px 20px;
+    }
+  }
+
+  .device-screen {
+    width: 100%;
+    height: 100%;
+    background: var(--canvas-screen-background, #ffffff);
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .canvas {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: visible;
+    background: var(--canvas-background, #ffffff);
+    transition: transform 0.2s ease;
+
+    &.drag-over {
+      background: var(--canvas-drag-over, #e3f2fd);
+      outline: 2px dashed var(--primary-color, #007acc);
+      outline-offset: -2px;
+    }
+  }
+
+  // Editable elements
+  .editable-element {
+    position: absolute;
+    cursor: move;
+    transition: all 0.2s ease;
+    outline: none;
+    min-width: 20px;
+    min-height: 20px;
+
+    &:hover {
+      outline: 1px solid var(--element-hover-border, #007acc);
+      outline-offset: 2px;
+    }
+
+    &.selected {
+      outline: 2px solid var(--element-selected-border, #007acc);
+      outline-offset: 2px;
+      z-index: 1000;
+    }
+
+    &.dragging {
+      opacity: 0.8;
+      z-index: 1001;
+      cursor: move !important;
+    }
+
+    // Element type specific styles
+    &[data-element-type="heading"] {
+      font-size: 2rem;
+      font-weight: bold;
+      color: var(--text-color, #333);
+      margin: 0;
+      padding: 0.5rem;
+    }
+
+    &[data-element-type="text"] {
+      font-size: 1rem;
+      color: var(--text-color, #333);
+      margin: 0;
+      padding: 0.5rem;
+      line-height: 1.5;
+    }
+
+    &[data-element-type="image"] {
+      border: 1px solid var(--border-color, #ddd);
+      border-radius: 4px;
+      object-fit: cover;
+    }
+
+    &[data-element-type="button"] {
+      background: var(--primary-color, #007acc);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+
+      &:hover {
+        background: var(--primary-hover, #005a9e);
+      }
+    }
+
+    &[data-element-type="container"] {
+      background: var(--container-background, rgba(0, 0, 0, 0.05));
+      border: 2px dashed var(--container-border, #ccc);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-secondary, #666);
+      font-weight: 500;
+    }
+  }
+
+  // Resize handles
+  .resize-handle {
+    position: absolute;
+    background: var(--resize-handle-background, #007acc);
+    border: 2px solid var(--resize-handle-border, #ffffff);
+    border-radius: 50%;
+    width: 8px;
+    height: 8px;
+    z-index: 1002;
+
+    &.resize-nw {
+      top: -4px;
+      left: -4px;
+      cursor: nw-resize;
+    }
+
+    &.resize-ne {
+      top: -4px;
+      right: -4px;
+      cursor: ne-resize;
+    }
+
+    &.resize-sw {
+      bottom: -4px;
+      left: -4px;
+      cursor: sw-resize;
+    }
+
+    &.resize-se {
+      bottom: -4px;
+      right: -4px;
+      cursor: se-resize;
+    }
+
+    &.resize-n {
+      top: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      cursor: n-resize;
+    }
+
+    &.resize-s {
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      cursor: s-resize;
+    }
+
+    &.resize-e {
+      right: -4px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: e-resize;
+    }
+
+    &.resize-w {
+      left: -4px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: w-resize;
+    }
+
+    &:hover {
+      background: var(--resize-handle-hover, #005a9e);
+      transform: scale(1.2);
+    }
+  }
+
+  // Responsive design
+  @media (max-width: 1400px) {
+    .device-frame.desktop {
+      width: 1000px;
+      height: 700px;
+    }
+  }
+
+  @media (max-width: 1200px) {
+    .device-frame.desktop {
+      width: 900px;
+      height: 600px;
+    }
+
+    .editor-content {
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .device-frame {
+      &.desktop {
+        width: 100%;
+        height: 500px;
+      }
+
+      &.ipad,
+      &.ipad-pro {
+        transform: scale(0.8);
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .editor-header {
+      padding: 0.5rem;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-start;
+    }
+
+    .editor-content {
+      padding: 0.5rem;
+    }
+
+    .device-frame {
+      &:not(.desktop) {
+        transform: scale(0.7);
+      }
+
+      &.desktop {
+        height: 400px;
+      }
+    }
+
+    .editable-element {
+      &[data-element-type="heading"] {
+        font-size: 1.5rem;
+      }
+
+      &[data-element-type="text"] {
+        font-size: 0.9rem;
+      }
+
+      &[data-element-type="button"] {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .device-frame {
+      &:not(.desktop) {
+        transform: scale(0.6);
+      }
+
+      &.desktop {
+        height: 300px;
+      }
+    }
+
+    .resize-handle {
+      width: 12px;
+      height: 12px;
+
+      &.resize-nw,
+      &.resize-ne,
+      &.resize-sw,
+      &.resize-se {
+        top: -6px;
+        left: -6px;
+      }
+
+      &.resize-ne,
+      &.resize-se {
+        right: -6px;
+        left: auto;
+      }
+
+      &.resize-sw,
+      &.resize-se {
+        bottom: -6px;
+        top: auto;
+      }
+    }
+  }
+
+  // Accessibility improvements
+  @media (prefers-reduced-motion: reduce) {
+    .editable-element,
+    .device-frame,
+    .canvas {
+      transition: none;
+    }
+  }
+
+  // High contrast mode
+  @media (prefers-contrast: high) {
+    .editable-element {
+      &.selected {
+        outline-width: 3px;
+      }
+
+      &:hover {
+        outline-width: 2px;
+      }
+    }
+
+    .resize-handle {
+      border-width: 3px;
+    }
+  }
+}
+
+// Dark theme support
+[data-theme="dark"] main-editor {
+  --editor-background: #1e1e1e;
+  --editor-header-background: #2d2d30;
+  --canvas-background: #252526;
+  --canvas-screen-background: #1e1e1e;
+  --canvas-drag-over: #0e4f88;
+  --device-frame-background: #3e3e42;
+  --text-color: #cccccc;
+  --text-secondary: #969696;
+  --text-tertiary: #656565;
+  --border-color: #3e3e42;
+  --element-hover-border: #0078d4;
+  --element-selected-border: #0078d4;
+  --container-background: rgba(255, 255, 255, 0.05);
+  --container-border: #555;
+  --resize-handle-background: #0078d4;
+  --resize-handle-border: #1e1e1e;
+  --resize-handle-hover: #106ebe;
+}

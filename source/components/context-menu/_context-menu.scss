@@ -1,0 +1,290 @@
+/* Context Menu Component Styles */
+context-menu {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  
+  .context-menu {
+    background: var(--context-menu-background, #ffffff);
+    border: 1px solid var(--context-menu-border, #e0e0e0);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    padding: 0.5rem 0;
+    min-width: 180px;
+    font-size: 0.9rem;
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+
+    &.show {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+    }
+  }
+
+  .context-menu-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    color: var(--context-menu-text, #333333);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    gap: 0.75rem;
+    white-space: nowrap;
+    user-select: none;
+
+    i {
+      width: 16px;
+      text-align: center;
+      color: var(--context-menu-icon, #666666);
+      font-size: 0.9rem;
+    }
+
+    &:hover:not(.disabled) {
+      background: var(--context-menu-hover, #f0f0f0);
+      color: var(--context-menu-hover-text, #000000);
+
+      i {
+        color: var(--context-menu-hover-icon, #333333);
+      }
+    }
+
+    &:focus:not(.disabled) {
+      outline: none;
+      background: var(--context-menu-focus, #e3f2fd);
+      color: var(--context-menu-focus-text, #1976d2);
+
+      i {
+        color: var(--context-menu-focus-icon, #1976d2);
+      }
+    }
+
+    &:active:not(.disabled) {
+      background: var(--context-menu-active, #bbdefb);
+      transform: translateY(1px);
+    }
+
+    &.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      color: var(--context-menu-disabled-text, #999999);
+
+      i {
+        color: var(--context-menu-disabled-icon, #cccccc);
+      }
+    }
+
+    // Special styling for destructive actions
+    &[data-action="delete"] {
+      color: var(--context-menu-danger, #dc3545);
+
+      i {
+        color: var(--context-menu-danger, #dc3545);
+      }
+
+      &:hover:not(.disabled) {
+        background: var(--context-menu-danger-hover, #f8d7da);
+        color: var(--context-menu-danger-hover-text, #721c24);
+
+        i {
+          color: var(--context-menu-danger-hover-text, #721c24);
+        }
+      }
+
+      &:focus:not(.disabled) {
+        background: var(--context-menu-danger-focus, #f5c6cb);
+        color: var(--context-menu-danger-focus-text, #721c24);
+
+        i {
+          color: var(--context-menu-danger-focus-text, #721c24);
+        }
+      }
+    }
+
+    // Keyboard navigation indicator
+    &:focus-visible {
+      outline: 2px solid var(--focus-outline, #007acc);
+      outline-offset: -2px;
+    }
+  }
+
+  .context-menu-separator {
+    height: 1px;
+    background: var(--context-menu-separator, #e0e0e0);
+    margin: 0.5rem 0;
+  }
+
+  // Animation variants
+  &.slide-in {
+    .context-menu {
+      transform: translateX(-10px);
+
+      &.show {
+        transform: translateX(0);
+      }
+    }
+  }
+
+  &.fade-in {
+    .context-menu {
+      transform: none;
+
+      &.show {
+        transform: none;
+      }
+    }
+  }
+
+  // Size variants
+  &.compact {
+    .context-menu {
+      min-width: 150px;
+      font-size: 0.8rem;
+    }
+
+    .context-menu-item {
+      padding: 0.5rem 0.75rem;
+      gap: 0.5rem;
+
+      i {
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  &.large {
+    .context-menu {
+      min-width: 220px;
+      font-size: 1rem;
+    }
+
+    .context-menu-item {
+      padding: 1rem 1.25rem;
+      gap: 1rem;
+
+      i {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  // Responsive design
+  @media (max-width: 768px) {
+    .context-menu {
+      min-width: 160px;
+      font-size: 0.85rem;
+    }
+
+    .context-menu-item {
+      padding: 0.875rem 1rem;
+      gap: 0.625rem;
+
+      i {
+        font-size: 0.85rem;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .context-menu {
+      min-width: 140px;
+      font-size: 0.8rem;
+    }
+
+    .context-menu-item {
+      padding: 0.75rem 0.875rem;
+      gap: 0.5rem;
+
+      i {
+        width: 14px;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  // Accessibility improvements
+  @media (prefers-reduced-motion: reduce) {
+    .context-menu {
+      transition: opacity 0.1s ease;
+      transform: none;
+
+      &.show {
+        transform: none;
+      }
+    }
+
+    .context-menu-item {
+      transition: background-color 0.1s ease;
+
+      &:active:not(.disabled) {
+        transform: none;
+      }
+    }
+  }
+
+  // High contrast mode
+  @media (prefers-contrast: high) {
+    .context-menu {
+      border-width: 2px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    .context-menu-item {
+      &:focus:not(.disabled) {
+        outline: 3px solid var(--focus-outline, #007acc);
+        outline-offset: -3px;
+      }
+    }
+
+    .context-menu-separator {
+      height: 2px;
+    }
+  }
+}
+
+// Dark theme support
+[data-theme="dark"] context-menu {
+  --context-menu-background: #2d2d30;
+  --context-menu-border: #3e3e42;
+  --context-menu-text: #cccccc;
+  --context-menu-icon: #969696;
+  --context-menu-hover: #3e3e42;
+  --context-menu-hover-text: #ffffff;
+  --context-menu-hover-icon: #cccccc;
+  --context-menu-focus: #094771;
+  --context-menu-focus-text: #ffffff;
+  --context-menu-focus-icon: #ffffff;
+  --context-menu-active: #005a9e;
+  --context-menu-disabled-text: #656565;
+  --context-menu-disabled-icon: #555555;
+  --context-menu-separator: #3e3e42;
+  --context-menu-danger: #f48771;
+  --context-menu-danger-hover: #5a1e1e;
+  --context-menu-danger-hover-text: #f48771;
+  --context-menu-danger-focus: #721c24;
+  --context-menu-danger-focus-text: #f48771;
+}
+
+// Light theme (default)
+[data-theme="light"] context-menu {
+  --context-menu-background: #ffffff;
+  --context-menu-border: #e0e0e0;
+  --context-menu-text: #333333;
+  --context-menu-icon: #666666;
+  --context-menu-hover: #f0f0f0;
+  --context-menu-hover-text: #000000;
+  --context-menu-hover-icon: #333333;
+  --context-menu-focus: #e3f2fd;
+  --context-menu-focus-text: #1976d2;
+  --context-menu-focus-icon: #1976d2;
+  --context-menu-active: #bbdefb;
+  --context-menu-disabled-text: #999999;
+  --context-menu-disabled-icon: #cccccc;
+  --context-menu-separator: #e0e0e0;
+  --context-menu-danger: #dc3545;
+  --context-menu-danger-hover: #f8d7da;
+  --context-menu-danger-hover-text: #721c24;
+  --context-menu-danger-focus: #f5c6cb;
+  --context-menu-danger-focus-text: #721c24;
+}

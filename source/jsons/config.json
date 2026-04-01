@@ -1,0 +1,82 @@
+{
+  "deviceConfig": {
+    "desktop": {
+      "width": "100%",
+      "name": "Desktop",
+      "resolution": "Full width",
+      "type": "desktop"
+    },
+    "iphone-se": {
+      "width": 375,
+      "name": "iPhone SE",
+      "resolution": "375 × 667",
+      "type": "mobile"
+    },
+    "iphone-12": {
+      "width": 390,
+      "name": "iPhone 12",
+      "resolution": "390 × 844",
+      "type": "mobile"
+    },
+    "iphone-14-plus": {
+      "width": 428,
+      "name": "iPhone 14 Plus",
+      "resolution": "428 × 926",
+      "type": "mobile"
+    },
+    "samsung-s21": {
+      "width": 384,
+      "name": "Samsung Galaxy S21",
+      "resolution": "384 × 854",
+      "type": "mobile"
+    },
+    "samsung-s21-ultra": {
+      "width": 412,
+      "name": "Samsung S21 Ultra",
+      "resolution": "412 × 915",
+      "type": "mobile"
+    },
+    "pixel-5": {
+      "width": 393,
+      "name": "Google Pixel 5",
+      "resolution": "393 × 851",
+      "type": "mobile"
+    },
+    "pixel-7-pro": {
+      "width": 412,
+      "name": "Google Pixel 7 Pro",
+      "resolution": "412 × 892",
+      "type": "mobile"
+    },
+    "ipad": {
+      "width": 768,
+      "name": "iPad",
+      "resolution": "768 × 1024",
+      "type": "tablet"
+    },
+    "ipad-pro": {
+      "width": 1024,
+      "name": "iPad Pro",
+      "resolution": "1024 × 1366",
+      "type": "tablet"
+    }
+  },
+  "zoom": {
+    "minZoom": 0.25,
+    "maxZoom": 3,
+    "defaultZoom": 1
+  },
+  "history": {
+    "maxHistorySize": 50
+  },
+  "element": {
+    "defaultCounter": 0
+  },
+  "page": {
+    "defaultId": "page-1",
+    "defaultCounter": 1
+  },
+  "persistence": {
+    "mode": "localStorage"
+  }
+}

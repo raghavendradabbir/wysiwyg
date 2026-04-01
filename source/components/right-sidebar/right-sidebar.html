@@ -1,0 +1,294 @@
+<!-- Right Sidebar Component Template -->
+<div class="sidebar right-sidebar" id="rightSidebar">
+  <!-- Moved inside component: Right Sidebar Toggle Button -->
+  <button class="sidebar-toggle right-toggle" id="rightSidebarToggle" title="Toggle Right Sidebar">
+    <i class="fas fa-chevron-right" aria-hidden="true"></i>
+  </button>
+  <div class="right-tabs">
+    <button class="right-tab active" data-tab="styles">Styles</button>
+    <button class="right-tab" data-tab="properties">Properties</button>
+    <div class="right-tab-actions">
+      <button class="panel-action-btn" id="rightCollapseBtn" title="Collapse/Expand Sidebar">
+        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  
+  <div class="right-tab-content active" id="stylesTab">
+    <div class="styles-panel" id="stylesPanel">
+      <div class="no-selection">Select an element to style</div>
+      
+      <!-- Styles content will be populated dynamically -->
+      <div class="styles-content" style="display: none;">
+        <div class="style-section">
+          <div class="style-section-header">
+            <h4>Layout</h4>
+            <button class="section-toggle expanded">
+              <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="style-section-content">
+            <div class="style-group">
+              <label>Display</label>
+              <select class="style-input" data-property="display">
+                <option value="block">Block</option>
+                <option value="inline">Inline</option>
+                <option value="inline-block">Inline Block</option>
+                <option value="flex">Flex</option>
+                <option value="grid">Grid</option>
+                <option value="none">None</option>
+              </select>
+            </div>
+            <div class="style-group">
+              <label>Position</label>
+              <select class="style-input" data-property="position">
+                <option value="static">Static</option>
+                <option value="relative">Relative</option>
+                <option value="absolute">Absolute</option>
+                <option value="fixed">Fixed</option>
+                <option value="sticky">Sticky</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="style-section">
+          <div class="style-section-header">
+            <h4>Dimensions</h4>
+            <button class="section-toggle expanded">
+              <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="style-section-content">
+            <div class="style-group">
+              <label>Width</label>
+              <input type="text" class="style-input" data-property="width" placeholder="auto">
+            </div>
+            <div class="style-group">
+              <label>Height</label>
+              <input type="text" class="style-input" data-property="height" placeholder="auto">
+            </div>
+          </div>
+        </div>
+
+        <div class="style-section">
+          <div class="style-section-header">
+            <h4>Spacing</h4>
+            <button class="section-toggle expanded">
+              <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="style-section-content">
+            <div class="style-group">
+              <label>Margin</label>
+              <div class="spacing-inputs">
+                <input type="text" class="style-input spacing-input" data-property="margin-top" placeholder="0">
+                <input type="text" class="style-input spacing-input" data-property="margin-right" placeholder="0">
+                <input type="text" class="style-input spacing-input" data-property="margin-bottom" placeholder="0">
+                <input type="text" class="style-input spacing-input" data-property="margin-left" placeholder="0">
+              </div>
+            </div>
+            <div class="style-group">
+              <label>Padding</label>
+              <div class="spacing-inputs">
+                <input type="text" class="style-input spacing-input" data-property="padding-top" placeholder="0">
+                <input type="text" class="style-input spacing-input" data-property="padding-right" placeholder="0">
+                <input type="text" class="style-input spacing-input" data-property="padding-bottom" placeholder="0">
+                <input type="text" class="style-input spacing-input" data-property="padding-left" placeholder="0">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="style-section">
+          <div class="style-section-header">
+            <h4>Typography</h4>
+            <button class="section-toggle expanded">
+              <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="style-section-content">
+            <div class="style-group">
+              <label>Font Family</label>
+              <select class="style-input" data-property="font-family">
+                <option value="inherit">Inherit</option>
+                <option value="Arial, sans-serif">Arial</option>
+                <option value="Helvetica, sans-serif">Helvetica</option>
+                <option value="'Times New Roman', serif">Times New Roman</option>
+                <option value="Georgia, serif">Georgia</option>
+                <option value="'Courier New', monospace">Courier New</option>
+              </select>
+            </div>
+            <div class="style-group">
+              <label>Font Size</label>
+              <input type="text" class="style-input" data-property="font-size" placeholder="inherit">
+            </div>
+            <div class="style-group">
+              <label>Font Weight</label>
+              <select class="style-input" data-property="font-weight">
+                <option value="normal">Normal</option>
+                <option value="bold">Bold</option>
+                <option value="lighter">Lighter</option>
+                <option value="bolder">Bolder</option>
+                <option value="100">100</option>
+                <option value="200">200</option>
+                <option value="300">300</option>
+                <option value="400">400</option>
+                <option value="500">500</option>
+                <option value="600">600</option>
+                <option value="700">700</option>
+                <option value="800">800</option>
+                <option value="900">900</option>
+              </select>
+            </div>
+            <div class="style-group">
+              <label>Color</label>
+              <div class="color-input-wrapper">
+                <input type="color" class="style-input color-picker" data-property="color">
+                <input type="text" class="style-input color-text" data-property="color" placeholder="#000000">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="style-section">
+          <div class="style-section-header">
+            <h4>Background</h4>
+            <button class="section-toggle expanded">
+              <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="style-section-content">
+            <div class="style-group">
+              <label>Background Color</label>
+              <div class="color-input-wrapper">
+                <input type="color" class="style-input color-picker" data-property="background-color">
+                <input type="text" class="style-input color-text" data-property="background-color" placeholder="transparent">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="style-section">
+          <div class="style-section-header">
+            <h4>Border</h4>
+            <button class="section-toggle expanded">
+              <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="style-section-content">
+            <div class="style-group">
+              <label>Border Width</label>
+              <input type="text" class="style-input" data-property="border-width" placeholder="0">
+            </div>
+            <div class="style-group">
+              <label>Border Style</label>
+              <select class="style-input" data-property="border-style">
+                <option value="none">None</option>
+                <option value="solid">Solid</option>
+                <option value="dashed">Dashed</option>
+                <option value="dotted">Dotted</option>
+                <option value="double">Double</option>
+              </select>
+            </div>
+            <div class="style-group">
+              <label>Border Color</label>
+              <div class="color-input-wrapper">
+                <input type="color" class="style-input color-picker" data-property="border-color">
+                <input type="text" class="style-input color-text" data-property="border-color" placeholder="#000000">
+              </div>
+            </div>
+            <div class="style-group">
+              <label>Border Radius</label>
+              <input type="text" class="style-input" data-property="border-radius" placeholder="0">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="right-tab-content" id="propertiesTab">
+    <div class="properties-panel" id="propertiesPanel">
+      <div class="no-selection">Select an element to view properties</div>
+      
+      <!-- Properties content will be populated dynamically -->
+      <div class="properties-content" style="display: none;">
+        <div class="property-section">
+          <div class="property-section-header">
+            <h4>Element Properties</h4>
+            <button class="section-toggle expanded">
+              <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="property-section-content">
+            <div class="property-group">
+              <label>ID</label>
+              <input type="text" class="property-input" data-attribute="id" placeholder="Element ID">
+            </div>
+            <div class="property-group">
+              <label>Class</label>
+              <input type="text" class="property-input" data-attribute="class" placeholder="CSS Classes">
+            </div>
+            <div class="property-group">
+              <label>Title</label>
+              <input type="text" class="property-input" data-attribute="title" placeholder="Tooltip text">
+            </div>
+          </div>
+        </div>
+
+        <div class="property-section">
+          <div class="property-section-header">
+            <h4>Content</h4>
+            <button class="section-toggle expanded">
+              <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="property-section-content">
+            <div class="property-group">
+              <label>Text Content</label>
+              <textarea class="property-input" data-content="text" placeholder="Element text content" rows="3"></textarea>
+            </div>
+            <div class="property-group">
+              <label>Alt Text (Images)</label>
+              <input type="text" class="property-input" data-attribute="alt" placeholder="Alternative text">
+            </div>
+            <div class="property-group">
+              <label>Source (Images)</label>
+              <input type="text" class="property-input" data-attribute="src" placeholder="Image URL">
+            </div>
+          </div>
+        </div>
+
+        <div class="property-section">
+          <div class="property-section-header">
+            <h4>Accessibility</h4>
+            <button class="section-toggle expanded">
+              <i class="fas fa-chevron-down" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="property-section-content">
+            <div class="property-group">
+              <label>ARIA Label</label>
+              <input type="text" class="property-input" data-attribute="aria-label" placeholder="Accessible label">
+            </div>
+            <div class="property-group">
+              <label>ARIA Role</label>
+              <select class="property-input" data-attribute="role">
+                <option value="">None</option>
+                <option value="button">Button</option>
+                <option value="link">Link</option>
+                <option value="heading">Heading</option>
+                <option value="banner">Banner</option>
+                <option value="navigation">Navigation</option>
+                <option value="main">Main</option>
+                <option value="complementary">Complementary</option>
+                <option value="contentinfo">Content Info</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

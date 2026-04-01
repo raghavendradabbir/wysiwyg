@@ -1,0 +1,119 @@
+<!-- Startup Modal Component Template -->
+<div class="startup-modal" id="startupModal">
+  <div class="startup-modal-overlay"></div>
+  <div class="startup-modal-content">
+    <!-- Project Manager View -->
+    <div class="project-manager-view" id="projectManagerView">
+      <div class="startup-header">
+        <h2>
+          <i class="fas fa-folder-open" aria-hidden="true"></i>
+          Project Manager
+        </h2>
+        <p>Open an existing project or create a new one</p>
+      </div>
+
+      <div class="project-manager-content">
+        <!-- Search and Controls -->
+        <div class="project-controls">
+          <div class="controls-left">
+            <div class="search-group">
+              <div class="search-input-wrapper">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <input type="text" id="projectSearch" placeholder="Search projects..." />
+              </div>
+            </div>
+
+            <div class="control-options">
+              <label class="checkbox-label">
+                <input type="checkbox" id="groupBySolution" />
+                <span class="checkmark"></span>
+                Group by Solution
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projects Table -->
+        <div class="projects-table-container">
+          <div class="loading-state" id="projectsLoading">
+            <i class="fas fa-spinner fa-spin" aria-hidden="true"></i>
+            Loading projects...
+          </div>
+
+          <div class="empty-state" id="projectsEmpty" style="display: none;">
+            <i class="fas fa-folder-plus" aria-hidden="true"></i>
+            <h3>No Projects Found</h3>
+            <p>Create your first project to get started</p>
+          </div>
+
+          <table class="projects-table" id="projectsTable" style="display: none;">
+            <thead>
+              <tr>
+                <th>Project Name</th>
+                <th>Solution</th>
+                <th>Last modified</th>
+                <th>Version</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="projectsTableBody">
+              <!-- Projects will be populated here -->
+            </tbody>
+          </table>
+        </div>
+
+        <div class="action-buttons">
+          <button type="button" class="btn btn-primary" id="createNewProjectBtn">
+            <i class="fas fa-plus" aria-hidden="true"></i>
+            Create New Project
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Create Project Form (initially hidden) -->
+    <div class="create-project-view" id="createProjectView" style="display: none;">
+      <div class="startup-header">
+        <h2>
+          <i class="fas fa-rocket" aria-hidden="true"></i>
+          Create New Project
+        </h2>
+        <p>Set up your new project to get started</p>
+      </div>
+
+      <form class="startup-form" id="startupForm">
+        <div class="form-group">
+          <label for="projectName">Project Name *</label>
+          <input type="text" id="projectName" name="projectName" required placeholder="Enter project name" />
+          <small id="projectNameError" class="form-error" style="display: none;"></small>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label" for="useSameName">
+            <input type="checkbox" id="useSameName" name="useSameName" checked />
+            <span class="checkmark"></span>
+            Use the same name for both Project and Solution
+          </label>
+          <small class="help-text">Solutions can contain multiple projects for better organization</small>
+        </div>
+
+        <div class="form-group solution-group" id="solutionNameGroup" style="display: none;">
+          <label for="solutionName">Solution Name *</label>
+          <input type="text" id="solutionName" name="solutionName" placeholder="Enter solution name" />
+          <small id="solutionNameError" class="form-error" style="display: none;"></small>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn btn-secondary" id="backToProjectsBtn">
+            <i class="fas fa-arrow-left" aria-hidden="true"></i>
+            Back to Projects
+          </button>
+          <button type="submit" class="btn btn-primary">
+            <i class="fas fa-check" aria-hidden="true"></i>
+            Create Project
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

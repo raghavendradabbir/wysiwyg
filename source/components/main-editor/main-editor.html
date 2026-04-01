@@ -1,0 +1,27 @@
+<!-- Main Editor Component Template -->
+<div class="main-editor">
+  <div class="editor-header">
+    <div class="editor-header-left">
+      <div class="current-context" id="currentContext">
+        <!-- Current solution/project/page context -->
+      </div>
+    </div>
+    <div class="editor-header-right">
+      <label id="deviceInfo"></label>
+      <div id="expandDeviceFrame"></div>
+      <!-- Reopen Right Sidebar Button (visible only when right sidebar is collapsed) -->
+      <button id="reopenRightSidebarBtn" class="header-toggle-btn" title="Open Right Sidebar" style="display:none; width:28px; height:28px; border:1px solid #e0e0e0; border-radius:4px; background:#fff; color:#666; align-items:center; justify-content:center; cursor:pointer;">
+        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+  <div class="editor-content">
+    <div class="device-frame desktop" id="deviceFrame">
+      <div class="device-screen">
+        <div class="canvas" id="canvas">
+          <!-- Canvas content will be dynamically generated -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
